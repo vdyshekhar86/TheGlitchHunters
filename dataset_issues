@@ -1,0 +1,105 @@
+import csv
+import random
+
+# List of sample issues, resolutions, and statuses
+issues = [
+    "Unable to access shared drive", "Mobile app not syncing", "Keyboard not working",
+    "Software crashing on startup", "Monitor displaying incorrect colors", "Can't send emails",
+    "Scanner not recognized", "No sound from speakers", "Internet disconnects frequently",
+    "Can't access certain websites", "External drive not recognized", "Unable to print",
+    "Slow computer performance", "Touchpad not responding", "Can't open attachments",
+    "Projector not displaying", "Network drive not mapping", "Frequent disconnects from VPN",
+    "Slow application performance", "Webcam not working", "Frequent system crashes",
+    "Can't connect to network printer", "Application license expired", "Slow file transfers",
+    "Printer jams frequently", "Software update failure", "No network connectivity",
+    "Application not responding", "Can't connect to Wi-Fi", "Frequent pop-up ads",
+    "Data corruption issue", "Can't install new software", "External monitor not detected",
+    "Email filtering issue", "Frequent browser crashes", "Incorrect system time",
+    "Can't access remote desktop", "Computer overheating", "Lost network connection",
+    "Can't open web pages", "Power outage recovery", "Software compatibility issue",
+    "Slow system boot", "Can't connect to Bluetooth device", "Hard drive failure",
+    "Account locked out", "USB device not recognized", "Slow email delivery",
+    "Application freezing frequently", "Can't scan documents", "File permission issues",
+    "Network congestion issue", "Keyboard keys sticking", "Slow printing speed",
+    "Can't open encrypted files", "Software activation issue", "Frequent disconnections in video calls",
+    "Corrupted application settings", "Noisy system fan", "External display flickering",
+    "Error messages during startup", "Unable to sync calendar", "Application not launching",
+    "Low disk space", "Can't connect to FTP server", "Frequent login issues",
+    "Printer queue stuck", "Can't update antivirus", "Email account setup issue",
+    "Frequent error pop-ups", "Slow application startup", "Unresponsive system during updates",
+    "Frequent page not found errors", "Issues with dual monitors", "Data backup failures",
+    "Can't open PDF files", "Network printer offline", "No audio during video calls",
+    "Slow database queries", "Can't save documents", "Frequent browser hijacks",
+    "Issues with software patches", "Frequent system freezes", "Lost network drive",
+    "Can't access internal website", "Application security issues", "Printer toner issues",
+    "Can't play media files", "Frequent application errors", "Slow Wi-Fi speed"
+]
+
+resolutions = [
+    "Checked permissions and reconfigured access rights", "Reinstalled the app and ensured synchronization",
+    "Replaced faulty keyboard and confirmed functionality", "Updated software to latest version and checked for stability",
+    "Adjusted display settings and replaced faulty cable", "Configured email settings correctly and ensured email sending",
+    "Installed necessary drivers and ensured scanner functionality", "Checked audio settings and replaced defective speakers",
+    "Updated network drivers and replaced faulty router", "Checked firewall settings and allowed access to required sites",
+    "Reformatted external drive and ensured functionality", "Updated printer drivers and confirmed printer is working",
+    "Cleaned up system and optimized settings", "Reinstalled touchpad drivers and ensured functionality",
+    "Configured email client settings correctly and ensured attachments open", "Checked cable connections and replaced faulty cable",
+    "Reconfigured network drive settings and ensured accessibility", "Updated VPN client and ensured stable connection",
+    "Increased system resources and optimized application settings", "Reinstalled webcam drivers and ensured functionality",
+    "Updated system BIOS and checked hardware components", "Reconfigured network settings and ensured printer connectivity",
+    "Renewed application license and ensured functionality", "Checked network bandwidth and optimized transfer settings",
+    "Cleaned printer and replaced paper", "Checked for system compatibility and reinstalled update",
+    "Checked network cable and replaced faulty one", "Reinstalled application and checked system resources",
+    "Reconfigured Wi-Fi settings and ensured connectivity", "Installed ad blocker and cleaned up system",
+    "Restored data from backup and ensured data integrity", "Checked system compatibility and installed software successfully",
+    "Reinstalled display drivers and checked cable connections", "Configured email filters correctly and ensured functionality",
+    "Reinstalled browser and cleared cache", "Resynchronized system time with network time server",
+    "Reconfigured remote desktop settings and ensured connectivity", "Cleaned system fans and checked thermal paste",
+    "Checked network settings and replaced faulty switch", "Checked DNS settings and cleared browser cache",
+    "Ensured UPS functionality and checked system stability", "Installed compatible version and ensured functionality",
+    "Optimized startup programs and checked for malware", "Reinstalled Bluetooth drivers and paired device",
+    "Replaced hard drive and restored data from backup", "Reset account password and ensured access",
+    "Updated USB drivers and checked device functionality", "Checked mail server settings and optimized for performance",
+    "Updated application and monitored for stability", "Reconfigured scanner settings and ensured functionality",
+    "Adjusted file permissions and ensured access", "Optimized network traffic and checked for bandwidth hogs",
+    "Replaced faulty keyboard and confirmed functionality", "Checked printer settings and optimized for speed",
+    "Configured encryption settings correctly and ensured access", "Activated software and confirmed functionality",
+    "Checked network settings and optimized for stability", "Reset application settings and ensured functionality",
+    "Replaced faulty fan and checked for overheating", "Replaced display cable and checked display settings",
+    "Checked system logs and resolved startup issues", "Reconfigured calendar settings and ensured synchronization",
+    "Reinstalled application and checked for compatibility", "Cleaned up unnecessary files and optimized disk usage",
+    "Reconfigured FTP settings and ensured connectivity", "Reset user credentials and ensured stable login",
+    "Cleared printer queue and restarted printer", "Checked network connection and updated antivirus definitions",
+    "Configured email account correctly and ensured access", "Checked system for malware and optimized settings",
+    "Optimized startup settings and checked for conflicts", "Checked update logs and resolved conflicts",
+    "Checked DNS settings and optimized network configuration", "Reconfigured display settings and ensured both monitors work",
+    "Checked backup settings and ensured successful backup", "Reinstalled PDF reader and ensured compatibility",
+    "Checked printer status and restarted print services", "Checked audio settings and reconfigured for video calls",
+    "Optimized database settings and checked for performance issues", "Checked permissions and ensured save functionality",
+    "Reinstalled browser and checked system for malware", "Ensured patch compatibility and applied updates",
+    "Checked hardware components and updated drivers", "Reconfigured network drive and ensured access",
+    "Checked firewall settings and ensured website accessibility", "Applied security patches and ensured application integrity",
+    "Replaced toner and checked print quality", "Updated media player and ensured compatibility",
+    "Checked application logs and resolved issues", "Optimized Wi-Fi settings and ensured stable connectivity"
+]
+
+statuses = ["Resolved", "Closed"]
+
+# Function to generate a random incident resolution note
+def generate_incident(id):
+    issue = random.choice(issues)
+    resolution = random.choice(resolutions)
+    status = random.choice(statuses)
+    return [id, issue, resolution, status]
+
+# Generate 1000 incident resolution notes
+incident_notes = [["Incident ID", "Issue", "Resolution", "Status"]]
+for i in range(1101, 2101):
+    incident_notes.append(generate_incident(i))
+
+# Write to CSV file
+with open("incident_resolution_notes.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(incident_notes)
+
+print("1000 incident resolution notes have been generated and saved to incident_resolution_notes.csv")
